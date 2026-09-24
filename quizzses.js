@@ -708,5 +708,99 @@ const quizzses = [
     // Diğer tüm quizlerin (Minecraft, GTA Character, History vb.) eksiksiz ve temiz hali aynen korunmuştur.
 ];
 
+const extraQuizEntries = [
+    {
+        id: "GamerStyleQuest",
+        title: "Hangi Oyun Tarzı Oyuncususun?",
+        image: asQuestImage("GAMERSTYLE.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "GtaCharacterQuest",
+        title: "GTA Karakterin Kim?",
+        image: asQuestImage("GTA_CHRACTER.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "RockstarQuest",
+        title: "Hangi Rockstar Kahramanısın?",
+        image: asQuestImage("WhichRockstar.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "GtaHistoryQuest",
+        title: "GTA Tarih Bilgisi",
+        image: asQuestImage("GTA_HISTORY.png"),
+        type: "knowladge",
+        questions: [
+            question("GTA serisinde ilk oyun hangisidir?", ["A: GTA III", "B: GTA Vice City", "C: GTA San Andreas", "D: GTA V"], "A"),
+            question("GTA III'ün yayınlandığı yıl hangisidir?", ["A: 2004", "B: 2001", "C: 2007", "D: 2013"], "A"),
+            question("GTA serisinin en çok tartışılan şehirlerinden biri hangisidir?", ["A: Liberty City", "B: Los Santos", "C: Vice City", "D: San Fierro"], "C"),
+        ],
+    },
+    {
+        id: "Rdr2Quest",
+        title: "RDR2 Kahramanı Kim?",
+        image: asQuestImage("RDR2.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "SoulslikeQuest",
+        title: "Soulslike Oyuncusu Sen Misin?",
+        image: asQuestImage("Soulslike.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "NintendoQuest",
+        title: "Nintendo Hayranı Kim?",
+        image: asQuestImage("NINTENDO.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "PlaystationQuest",
+        title: "PlayStation Tutkunluğu",
+        image: asQuestImage("Playstaion.png"),
+        type: "personality",
+        resultMap: quizzses[0].resultMap,
+        questions: quizzses[0].questions,
+    },
+    {
+        id: "GameTechQuest",
+        title: "Oyun Motorları & Teknoloji",
+        image: asQuestImage("OyunMotorlarITeknoloji.png"),
+        type: "knowladge",
+        questions: [
+            question("Unity için geliştirilen oyunlar çoğunlukla hangi türde daha sık kullanılır?", ["A: 2D ve 3D oyunlar", "B: Yalnızca masaüstü yazılımlar", "C: Sadece web siteleri", "D: İşletim sistemi çekirdekleri"], "A"),
+            question("Oyunlarda 'frame rate' neyi ifade eder?", ["A: Oyun içi ses seviyesini", "B: Ekrandaki kare hızını", "C: Karakterin dayanıklılığını", "D: Harita boyutunu"], "B"),
+            question("Bir oyunun 'RTX' desteği ne anlama gelir?", ["A: Yalnızca giriş kontrolü", "B: Nvidia gerçek zamanlı ışın izleme desteği", "C: Oyun içi para birimi", "D: Yerel depolama kartı"], "B"),
+        ],
+    },
+    {
+        id: "MinecraftKnowledgeQuest",
+        title: "Minecraft Bilgi Testi",
+        image: asQuestImage("MC_KNOWLADGE.png"),
+        type: "knowladge",
+        questions: [
+            question("Minecraft'ta en yaygın kaynak bloklarından biri hangisidir?", ["A: Altın", "B: Taş", "C: Elmas", "D: Gümüş"], "B"),
+            question("Minecraft'ta bir oyuncu en hızlı şekilde yemek için hangi öğeyi kullanır?", ["A: Demir pickaxe", "B: Ekşi elma", "C: Çubuk", "D: Mısır"], "D"),
+            question("Minecraft'ta 'Redstone' ne işe yarar?", ["A: Dünya haritasi oluşturur", "B: Mantık devreleri ve mekanik araçlar kurar", "C: Sadece dekoratif bloğdur", "D: Yalnızca suyu temizler"], "B"),
+        ],
+    },
+];
+
+quizzses.push(...extraQuizEntries);
+
 export { characterDetails };
 export default quizzses;
