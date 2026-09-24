@@ -1,18 +1,16 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { characterDetails } from "./quizzses";
-import './QuestPage.css';
+import "./QuestPage.css";
 
-
-function QuizPage({ quiz, onBack, onQuizCompleted }) {
+function QuizPage({ quiz, onBack, setQuizTotalCount }) {
   // Store the selected answer for each question by its index.
   const [answers, setAnswers] = useState({});
+
   // Track whether the quiz has been submitted and which result view is open.
   const [QuizFinished, setQuizFinished] = useState(false);
   const [message, setMessage] = useState("");
   const [showReview, setShowReview] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const completionRecorded = useRef(false);
-
 
   const [pageColor] = useState(
     localStorage.getItem("PageColor") || "Main"
@@ -20,7 +18,14 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
 
   if (!quiz || !quiz.questions) {
     return (
-      <div className="QuizContainer" style={{ color: "white", textAlign: "center", padding: "50px" }}>
+      <div
+        className="QuizContainer"
+        style={{
+          color: "white",
+          textAlign: "center",
+          padding: "50px"
+        }}
+      >
         <h2>Quiz verisi yüklenemedi!</h2>
         <button onClick={onBack}>Geri Dön</button>
       </div>
@@ -33,40 +38,34 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
       ? "black"
       : "linear-gradient(135deg, red, blue, purple)";
 
-
   function choice(option, questionIndex) {
     // Update only the answer belonging to the selected question.
-    setAnswers(prevAnswers => ({
+    setAnswers((prevAnswers) => ({
       ...prevAnswers,
       [questionIndex]: option
     }));
   }
 
-
   function finishQuiz() {
-
     // Do not allow the user to submit until every question has an answer.
     if (Object.keys(answers).length < quiz.questions.length) {
-      setMessage("Lütfen Quiz'i bitirmeden önce Tüm soruları cevapla !");
+      setMessage(
+        "Lütfen Quiz'i bitirmeden önce Tüm soruları cevapla !"
+      );
       return;
-    }
-
-
-    // Record completion only once, even if the button is clicked repeatedly.
-    if (!completionRecorded.current) {
-      completionRecorded.current = true;
-      onQuizCompleted();
     }
 
     setQuizFinished(true);
   }
 
   function HandleBack() {
+    // Count a quiz only when the user leaves a completed result screen.
+    if (QuizFinished) {
+      setQuizTotalCount((prev) => prev + 1);
+    }
+
     onBack();
-
-
   }
-
 
   function getKnowledgeResult() {
     // Calculate correct answers and convert the result to a percentage.
@@ -75,7 +74,7 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
     quiz.questions.forEach((question, index) => {
       const answer = answers[index];
 
-      if (answer?.charAt(0) === question.correctAnswer) {
+      if (answer.charAt(0) === question.correctAnswer) {
         correct++;
       }
     });
@@ -89,10 +88,9 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
     return {
       correct,
       wrong,
-      point,
+      point
     };
   }
-
 
   function getPersonailtyResult() {
     // Count how often each character is selected by the user's answers.
@@ -100,7 +98,7 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
 
     quiz.questions.forEach((question, index) => {
       const answer = answers[index];
-      const letter = answer?.charAt(0);
+      const letter = answer.charAt(0);
 
       let characters = [];
 
@@ -114,7 +112,8 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
 
       characters.forEach((character) => {
         if (character) {
-          scores[character] = (scores[character] || 0) + 1;
+          scores[character] =
+            (scores[character] || 0) + 1;
         }
       });
     });
@@ -122,9 +121,7 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
     return scores;
   }
 
-
   if (QuizFinished) {
-
     // Knowledge quizzes show a score and an optional answer review.
     if (quiz.type === "knowladge") {
       const result = getKnowledgeResult();
@@ -148,27 +145,26 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
             PUAN: {result.point} / 100
           </p>
 
-
           {result.wrong > 0 && !showReview && (
             <button onClick={() => setShowReview(true)}>
               Sonuçları Kontrol Et !
             </button>
           )}
 
-
           {showReview && (
             <div className="AnswerReview">
-
               {/* Compare every selected answer with the correct answer. */}
               {quiz.questions.map((question, index) => {
                 const selectedAnswer = answers[index];
 
                 const isCorrect =
-                  selectedAnswer?.charAt(0) === question.correctAnswer;
+                  selectedAnswer.charAt(0) ===
+                  question.correctAnswer;
 
                 const correctAnswer = question.options.find(
                   (option) =>
-                    option.charAt(0) === question.correctAnswer
+                    option.charAt(0) ===
+                    question.correctAnswer
                 );
 
                 return (
@@ -198,18 +194,15 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
                   </div>
                 );
               })}
-
             </div>
           )}
 
-          <button onClick={() => HandleBack('/')}>
+          <button onClick={HandleBack}>
             GERİ
           </button>
-
         </div>
       );
     }
-
 
     // Personality quizzes show the character with the highest score.
     const scores = getPersonailtyResult();
@@ -219,17 +212,16 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
     )[0];
 
     const characterName = bestCharacter?.[0];
-
     const characterInfo = characterDetails[characterName];
 
-    const handleCharacterImageError = () => setImageError(true);
+    const handleCharacterImageError = () =>
+      setImageError(true);
 
     return (
       <div
         className="QuizContainer"
         style={{ background: quizBackground }}
       >
-
         <h2>{quiz.title}</h2>
 
         <p>Sonucun:</p>
@@ -238,10 +230,8 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
           {characterName || "Sonuç bulunamadı"}
         </h2>
 
-
         {characterInfo && (
           <div className="CharacterResult">
-
             {characterInfo.image && !imageError && (
               <img
                 src={characterInfo.image}
@@ -260,102 +250,80 @@ function QuizPage({ quiz, onBack, onQuizCompleted }) {
             <p>
               {characterInfo.description}
             </p>
-
           </div>
         )}
 
-
-        <button onClick={() => HandleBack('/')}>
+        <button onClick={HandleBack}>
           GERİ
         </button>
-
       </div>
     );
   }
-
 
   return (
     <div
       className="QuizContainer"
       style={{ background: quizBackground }}
     >
-
       <div className="AllQuestIndex">
-
         <div className="QuestionItems">
-
           <div className="OptionItems">
-
             <h1 className="QuizTitle">
               {quiz.title}
             </h1>
 
-
             {/* Render every question and its available options. */}
             {quiz.questions.map((question, index) => (
               <div key={index}>
-
                 <h3 className="QuestionStyle">
                   {question.quesiton}
                 </h3>
 
-
                 {question.options.map((option) => {
                   const letter = option.charAt(0);
+
                   // Personality quizzes may provide extra details for each option.
-                  const details = question.optionDetails?.[letter];
+                  const details =
+                    question.optionDetails?.[letter];
 
                   return (
                     <button
-                      className={`OptionStyles ${answers[index] === option
-                        ? "selectedOption"
-                        : ""
-                        }`}
+                      className={`OptionStyles ${
+                        answers[index] === option
+                          ? "selectedOption"
+                          : ""
+                      }`}
                       key={option}
                       onClick={() =>
                         choice(option, index)
                       }
                     >
-
                       <div>
                         {option}
                       </div>
 
-
                       {details && (
                         <div className="OptionDetails">
-
-
-
                           <p className="OptionDescription">
                             {details.description}
                           </p>
-
                         </div>
                       )}
-
                     </button>
                   );
                 })}
-
               </div>
             ))}
 
-
             <div className="FinishQuizBtn">
-
               <button onClick={finishQuiz}>
                 Testi Bitir
               </button>
 
               <p>{message}</p>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
   );
