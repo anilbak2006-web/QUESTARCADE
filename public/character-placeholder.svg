@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Character placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2d0d5d"/>
+      <stop offset="100%" stop-color="#1b1d5f"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" rx="24" fill="url(#bg)"/>
+  <circle cx="320" cy="170" r="88" fill="#f4e6ff" opacity="0.95"/>
+  <path d="M180 390C210 295 280 255 320 255C360 255 430 295 460 390" fill="#f4e6ff" opacity="0.93"/>
+  <circle cx="285" cy="160" r="8" fill="#2d0d5d"/>
+  <circle cx="355" cy="160" r="8" fill="#2d0d5d"/>
+  <path d="M290 205Q320 220 350 205" stroke="#2d0d5d" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <text x="320" y="438" text-anchor="middle" font-size="34" font-family="Arial, sans-serif" fill="#ffffff" font-weight="700">Karakter</text>
+</svg>

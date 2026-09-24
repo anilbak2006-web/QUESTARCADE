@@ -1,0 +1,17 @@
+# Keep the HTML fresh after each Cloudflare Pages deployment.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Vite asset filenames are content-hashed and can be cached safely.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Quiz images use stable public URLs and can be reused between visits.
+/QUEST_IMAGES/*
+  Cache-Control: public, max-age=604800
+
+/*.png
+  Cache-Control: public, max-age=604800

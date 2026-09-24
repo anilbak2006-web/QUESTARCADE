@@ -1,0 +1,249 @@
+/* =========================================
+   CONTAINER & LAYOUT
+========================================= */
+.QuizContainer {
+    display: block;
+    width: min(1100px, 92%);
+    min-height: 85vh;
+    /* 100vh bazen mobilde taşma yapar, 85vh daha dengelidir */
+    margin: 40px auto;
+    padding: clamp(15px, 4vw, 30px);
+    /* Ekran küçüldükçe padding azalır */
+    box-sizing: border-box;
+
+    border-radius: 22px;
+    border: clamp(3px, 1vw, 6px) solid black;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+    /* Gölgeler daha modernleştirildi */
+
+    color: white;
+    transition: background 0.3s ease;
+    /* Arka plan değişimleri yumuşatıldı */
+}
+
+.AllQuestIndex {
+    width: min(900px, 100%);
+    margin: 0 auto;
+    padding: clamp(5px, 2vw, 10px);
+    box-sizing: border-box;
+}
+
+.QuestionItems,
+.OptionItems {
+    width: 100%;
+}
+
+.QuizTitle {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bolder;
+    font-size: clamp(24px, 5vw, 36px);
+    /* Ekran boyutuna göre otomatik büyür/küçülür */
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    /* Başlığa derinlik katar */
+}
+
+.QuestionStyle {
+    font-family: monospace;
+    font-style: italic;
+    color: white;
+    font-weight: bolder;
+    font-size: clamp(18px, 4vw, 24px);
+    margin-top: 34px;
+    line-height: 1.4;
+}
+
+/* =========================================
+   OPTIONS (ŞIKLAR)
+========================================= */
+.OptionStyle,
+.OptionStyles {
+    display: block;
+    width: min(600px, 100%);
+    min-height: 48px;
+    /* Mobilde dokunma alanını artırmak için biraz yükseltildi */
+    margin: 12px auto;
+    padding: 12px 16px;
+    box-sizing: border-box;
+
+    color: black;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+
+    cursor: pointer;
+    text-align: left;
+    font-size: clamp(14px, 3vw, 16px);
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+    /* Animasyonlar akıcılaştırıldı */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.OptionStyle:hover,
+.OptionStyles:hover {
+    background-color: #e3f2fd;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tıklanma Hissiyatı (Aktif Durum) */
+.OptionStyle:active,
+.OptionStyles:active {
+    transform: translateY(2px) scale(0.98);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+.OptionStyles.selectedOption {
+    background-color: #1261a0;
+    border-color: white;
+    box-shadow: 0 0 10px rgba(18, 97, 160, 0.6);
+    color: white;
+    transform: scale(1.02);
+    /* Seçilen şık hafif öne çıkar */
+}
+
+/* =========================================
+   HIDDEN DETAILS
+========================================= */
+.OptionDetails,
+.OptionImage,
+.OptionDescription {
+    display: none;
+}
+
+/* =========================================
+   FINISH & BACK BUTTONS
+========================================= */
+.FinishQuizBtn {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.FinishQuizBtn button,
+.QuizContainer>button {
+    display: block;
+    margin: 20px auto;
+    padding: 14px 28px;
+
+    color: white;
+    background-color: #1261a0;
+    border: 2px solid white;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-weight: bold;
+    font-size: clamp(14px, 3vw, 16px);
+
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.FinishQuizBtn button:hover,
+.QuizContainer>button:hover {
+    background-color: #1887d7;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.FinishQuizBtn button:active,
+.QuizContainer>button:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+/* =========================================
+   ANSWER REVIEW (SONUÇ KONTROLÜ)
+========================================= */
+.AnswerReview {
+    margin: 30px auto;
+    padding: clamp(15px, 4vw, 24px);
+    max-width: 800px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.ReviewQuestion {
+    margin-bottom: 22px;
+    padding: clamp(12px, 3vw, 18px);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.ReviewQuestion h3 {
+    margin-top: 0;
+    color: white;
+    font-size: clamp(16px, 3.5vw, 20px);
+}
+
+.CorrectAnswer,
+.WrongAnswer {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.CorrectAnswer {
+    color: #4ade80;
+    background-color: rgba(74, 222, 128, 0.15);
+    border-left: 4px solid #4ade80;
+}
+
+.WrongAnswer {
+    color: #f87171;
+    background-color: rgba(248, 113, 113, 0.15);
+    border-left: 4px solid #f87171;
+}
+
+/* =========================================
+   PERSONALITY RESULT
+========================================= */
+.CharacterResult {
+    width: min(700px, 100%);
+    margin: 25px auto;
+    padding: clamp(15px, 4vw, 25px);
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 18px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.CharacterResultImage {
+    display: block;
+    width: min(400px, 100%);
+    max-height: 50vh;
+    /* Ekrana göre orantılı yükseklik */
+    object-fit: contain;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+    border: 3px solid white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+}
+
+.CharacterFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(400px, 100%);
+    min-height: 220px;
+    margin: 0 auto 20px;
+    border-radius: 16px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
+    color: white;
+    font-weight: 700;
+    font-size: clamp(24px, 5vw, 34px);
+    letter-spacing: 0.04em;
+}
+
+.CharacterResult p {
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: clamp(15px, 3.5vw, 18px);
+    line-height: 1.7;
+    margin: 0;
+}
